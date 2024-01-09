@@ -49,7 +49,7 @@ app.post('/movies/', async (request, response) => {
   const {directorId, movieName, leadActor} = movieDetails
   const addMovieQuery = `
 INSERT INTO
-movie (director_id,movi_name,lead_actor)
+movie (director_id,movie_name,lead_actor)
 VALUES
 (
 ${directorId},
@@ -125,9 +125,9 @@ SELECT
 *
 FROM
 director;`
-  const movieArray = await db.all(getAllDirectorQuery)
+  const moviesArray = await db.all(getAllDirectorQuery)
   response.send(
-    moviesArray.map(director => convertDirectorDetailsPascalCase(director)),
+    moviesArray.map((director) => convertDirectorDetailsPascalCase(director)),
   )
 })
 
@@ -150,7 +150,7 @@ director.director_id = ${directorId};`
   const movies = await db.all(getDirectorMovieQuery)
   console.log(directorId)
   response.send(
-    movies.map(movienames => convertMovieNamePascalCase(movienames)),
+    movies.map((movienames) => convertMovieNamePascalCase(movienames)),
   )
 })
 
